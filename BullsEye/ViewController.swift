@@ -9,10 +9,20 @@
 import UIKit
 
 class ViewController: UIViewController {
-    var currentValue: Int = 50;
+    var currentValue: Int = 0;
+    var targetValue: Int = 0;
+    // tells interface builder that you now have a variable
+    // slider that can be connected to a UISlider object.
+    
+    // interface builder likes to call these variables outlets
+    // outlets have to be connected to something on the storyboard
+    @IBOutlet weak var slider: UISlider!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        currentValue = lroundf(slider.value)
+        // upper limit in arc4random treated as exclusive
+        targetValue = 1 + Int(arc4random_uniform(100))
     }
 
     override func didReceiveMemoryWarning() {
@@ -34,7 +44,7 @@ class ViewController: UIViewController {
         present(alert, animated: true, completion: nil)
         
     }
-    
+    // interface builder likes to call methods actions
     @IBAction func sliderMoved(_slider: UISlider) {
       currentValue = lroundf(_slider.value)
     }
