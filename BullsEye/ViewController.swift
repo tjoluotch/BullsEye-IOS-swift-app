@@ -17,6 +17,9 @@ class ViewController: UIViewController {
     // interface builder likes to call these variables outlets
     // outlets have to be connected to something on the storyboard
     @IBOutlet weak var slider: UISlider!
+    //outlet for target score player is aiming for.
+    // top right label in storyboard
+    @IBOutlet weak var targetLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,12 +57,17 @@ class ViewController: UIViewController {
       currentValue = lroundf(_slider.value)
     }
     
-    func startNewRound() {
+     func startNewRound() {
         targetValue = 1 + Int(arc4random_uniform(100))
         // modified code excecise so that slider doesn't reset to
         //  50 but starts in previous rounds position
         //currentValue = 50
         slider.value = Float(currentValue)
+        updateLabels()
+    }
+    
+    func updateLabels() {
+        targetLabel.text = String(targetValue)
     }
 
 }
