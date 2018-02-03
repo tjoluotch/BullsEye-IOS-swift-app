@@ -20,6 +20,10 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        // added current value back to view loader when the app starts
+        // this is part of the modification so that slider starts
+        // at 50
+        currentValue = 50;
         startNewRound()
     }
 
@@ -52,7 +56,9 @@ class ViewController: UIViewController {
     
     func startNewRound() {
         targetValue = 1 + Int(arc4random_uniform(100))
-        currentValue = 50
+        // modified code excecise so that slider doesn't reset to
+        //  50 but starts in previous rounds position
+        //currentValue = 50
         slider.value = Float(currentValue)
     }
 
