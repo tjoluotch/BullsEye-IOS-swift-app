@@ -20,9 +20,7 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        currentValue = lroundf(slider.value)
-        // upper limit in arc4random treated as exclusive
-        targetValue = 1 + Int(arc4random_uniform(100))
+        startNewRound()
     }
 
     override func didReceiveMemoryWarning() {
@@ -31,7 +29,8 @@ class ViewController: UIViewController {
     }
     
     @IBAction func showAlert() {
-        let message = "The value of the slider is: \(currentValue)"
+        let message = "The value of the slider is: \(currentValue)" +
+        "\nThe target value is: \(targetValue)"
         
         let alert = UIAlertController(title: "Hello, World",
                                       message: message,
@@ -42,11 +41,19 @@ class ViewController: UIViewController {
         alert.addAction(action)
         
         present(alert, animated: true, completion: nil)
+        // new round started in game
+        startNewRound()
         
     }
     // interface builder likes to call methods actions
     @IBAction func sliderMoved(_slider: UISlider) {
       currentValue = lroundf(_slider.value)
+    }
+    
+    func startNewRound() {
+        targetValue = 1 + Int(arc4random_uniform(100))
+        currentValue = 50
+        slider.value = Float(currentValue)
     }
 
 }
